@@ -1,0 +1,16 @@
+image:
+  repository: ayon-self-docker
+  tag: "latest"
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 5000
+keycloak:
+  url: http://keycloak:8080
+  realm: ayon
+  clientId: ayon
+  clientSecret: ayonsecret
+ingress:
+  enabled: true
+  className: nginx
+  host: ayon.local

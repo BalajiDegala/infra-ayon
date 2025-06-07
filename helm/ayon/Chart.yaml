@@ -1,0 +1,5 @@
+apiVersion: v2
+name: ayon
+version: 0.1.0
+appVersion: "latest"
+description: Deploy AYON server with Keycloak SSO

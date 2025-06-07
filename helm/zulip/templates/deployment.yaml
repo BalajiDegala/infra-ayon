@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zulip
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zulip
+  template:
+    metadata:
+      labels:
+        app: zulip
+    spec:
+      containers:
+        - name: zulip
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: SOCIAL_AUTH_OIDC_ENABLED
+              value: "true"
+            - name: SOCIAL_AUTH_OIDC_PROVIDER_NAME
+              value: keycloak
+            - name: SOCIAL_AUTH_OIDC_PROVIDER_URL
+              value: {{ .Values.keycloak.url | quote }}
+            - name: SOCIAL_AUTH_OIDC_KEY
+              value: {{ .Values.keycloak.clientId | quote }}
+            - name: SOCIAL_AUTH_OIDC_SECRET
+              value: {{ .Values.keycloak.clientSecret | quote }}
+            - name: SETTING_EXTERNAL_HOST
+              value: {{ .Values.ingress.host | quote }}
+          ports:
+            - containerPort: 80
