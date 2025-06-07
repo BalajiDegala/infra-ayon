@@ -1,0 +1,16 @@
+image:
+  repository: quay.io/keycloak/keycloak
+  tag: "24.0"
+  pullPolicy: IfNotPresent
+adminUser: admin
+adminPassword: admin
+service:
+  type: ClusterIP
+  port: 8080
+persistence:
+  enabled: true
+  size: 1Gi
+ingress:
+  enabled: true
+  className: nginx
+  host: keycloak.local

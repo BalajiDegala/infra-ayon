@@ -1,0 +1,5 @@
+apiVersion: v2
+name: zulip
+version: 0.1.0
+appVersion: "latest"
+description: Deploy Zulip chat with Keycloak SSO

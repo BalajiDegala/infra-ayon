@@ -1,0 +1,16 @@
+image:
+  repository: zulip/docker-zulip
+  tag: "8.0-0"
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 80
+keycloak:
+  url: http://keycloak:8080
+  realm: zulip
+  clientId: zulip
+  clientSecret: zulipsecret
+ingress:
+  enabled: true
+  className: nginx
+  host: zulip.local

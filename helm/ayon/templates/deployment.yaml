@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ayon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ayon
+  template:
+    metadata:
+      labels:
+        app: ayon
+    spec:
+      containers:
+        - name: ayon
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: KEYCLOAK_URL
+              value: {{ .Values.keycloak.url | quote }}
+            - name: KEYCLOAK_REALM
+              value: {{ .Values.keycloak.realm | quote }}
+            - name: KEYCLOAK_CLIENT_ID
+              value: {{ .Values.keycloak.clientId | quote }}
+            - name: KEYCLOAK_CLIENT_SECRET
+              value: {{ .Values.keycloak.clientSecret | quote }}
+          ports:
+            - containerPort: 5000
